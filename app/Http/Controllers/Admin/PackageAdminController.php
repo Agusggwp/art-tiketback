@@ -37,9 +37,9 @@ class PackageAdminController extends Controller
             $data['image'] = $request->file('image')->store('packages', 'public');
         }
 
+        // PERBAIKAN: HAPUS 'title' — GUNAKAN 'name' SAJA!
         Package::create([
-            'title'       => $data['title'],
-            'name'        => $data['title'],
+            'name'        => $data['title'],  // title dari request jadi name di database
             'price'       => $data['price'],
             'detail'      => $data['description'],
             'image'       => $data['image'] ?? null,
@@ -60,7 +60,7 @@ class PackageAdminController extends Controller
         $package = Package::findOrFail($id);
 
         $request->validate([
-            
+            'title'       => 'required|string|max:255',
             'price'       => 'required|numeric|min:0',
             'description' => 'required|string',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
@@ -77,9 +77,9 @@ class PackageAdminController extends Controller
             $data['image'] = $request->file('image')->store('packages', 'public');
         }
 
+        // PERBAIKAN: HAPUS 'title' — GUNAKAN 'name' SAJA!
         $package->update([
-            
-            'name'        => $data['title'],
+            'name'        => $data['title'],  // title dari request jadi name di database
             'price'       => $data['price'],
             'detail'      => $data['description'],
             'image'       => $data['image'] ?? $package->image,
