@@ -60,7 +60,7 @@ class PackageAdminController extends Controller
         $package = Package::findOrFail($id);
 
         $request->validate([
-            'title'       => 'required|string|max:255',
+            
             'price'       => 'required|numeric|min:0',
             'description' => 'required|string',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
@@ -78,7 +78,7 @@ class PackageAdminController extends Controller
         }
 
         $package->update([
-            'title'       => $data['title'],
+            
             'name'        => $data['title'],
             'price'       => $data['price'],
             'detail'      => $data['description'],
